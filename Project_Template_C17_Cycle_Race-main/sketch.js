@@ -17,21 +17,21 @@ var distance=0;
 var gameOver, restart;
 
 function preload(){
-  pathImg = loadImage("images/Road.png");
-  mainRacerImg1 = loadAnimation("images/mainPlayer1.png","images/mainPlayer2.png");
-  mainRacerImg2= loadAnimation("images/mainPlayer3.png");
+  pathImg = loadImage("Road.png");
+  mainRacerImg1 = loadAnimation("mainPlayer1.png","mainPlayer2.png");
+  mainRacerImg2= loadAnimation("mainPlayer3.png");
   
-  oppPink1Img = loadAnimation("images/opponent1.png","images/opponent2.png");
-  oppPink2Img = loadAnimation("images/opponent3.png");
+  oppPink1Img = loadAnimation("opponent1.png","opponent2.png");
+  oppPink2Img = loadAnimation("opponent3.png");
   
-  oppYellow1Img = loadAnimation("images/opponent4.png","images/opponent5.png");
-  oppYellow2Img = loadAnimation("images/opponent6.png");
+  oppYellow1Img = loadAnimation("opponent4.png","opponent5.png");
+  oppYellow2Img = loadAnimation("opponent6.png");
   
-  oppRed1Img = loadAnimation("images/opponent7.png","images/opponent8.png");
-  oppRed2Img = loadAnimation("images/opponent9.png");
+  oppRed1Img = loadAnimation("opponent7.png","opponent8.png");
+  oppRed2Img = loadAnimation("opponent9.png");
   
-  cycleBell = loadSound("sound/bell.mp3");
-  gameOverImg = loadImage("images/gameOver.png");
+  cycleBell = loadSound("bell.mp3");
+  gameOverImg = loadImage("gameOver.png");
 }
 
 function setup(){
@@ -123,7 +123,10 @@ function draw() {
 }else if (gameState === END) {
     gameOver.visible = true;
     //Add code to show restart game instrution in text here
-    text("Prees Up Arrwo To Restart The Game");
+   textSize(25);
+      text("Prees Up Arrwo To Restart The Game",500,200);
+    
+    
   
     path.velocityX = 0;
     mainCyclist.velocityY = 0;
@@ -137,10 +140,13 @@ function draw() {
   
     redCG.setVelocityXEach(0);
     redCG.setLifetimeEach(-1);
+    if(keyDown("UP_ARROW")) {
+      reset();
+    }
 
-    //write condition for calling reset( )
-    mainCyclist();
-    restart();
+   
+    
+   
 
       
     
@@ -175,14 +181,15 @@ function redCyclists(){
 }
 
 //create reset function here
-function restart()
-{
-  gameState = play;
+function reset(){
+  gameState = PLAY;
   gameOver.visible = false;
-  mainCyclist.addAnimation("mainCyclist");
-
+  mainCyclist.addAnimation("SahilRunning",mainRacerImg1);
+  
   pinkCG.destroyEach();
-
+  yellowCG.destroyEach();
+  redCG.destroyEach();
+  
   distance = 0;
 }
 
